@@ -50,6 +50,13 @@ public class MainActivity extends AppCompatActivity {
                     showPairing();
                 } else if (scanMode == BluetoothAdapter.SCAN_MODE_CONNECTABLE) {
                     hideProgress();
+                    mPairedDevices = mBluetoothAdapter.getBondedDevices();
+                    if (mPairedDevices == null || mPairedDevices.size() == 0) {
+                        showDisabled();
+                    } else if (mPairedDevices.size() == 1) {
+                        mPairedBTDevice = mPairedDevices.iterator().next();
+                        showEnabled();
+                    }
                 }
             }
 
